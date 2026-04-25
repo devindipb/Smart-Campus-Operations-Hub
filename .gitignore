@@ -1,0 +1,14 @@
+backend/target/
+backend/.m2/
+backend/data/
+backend/boot-check.log
+backend/boot-check.err.log
+frontend/node_modules/
+frontend/dist/
+.idea/
+.vscode/
+*.log
+*.db
+*.mv.db
+*.trace.db
+
