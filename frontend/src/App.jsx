@@ -111,7 +111,7 @@ export default function App() {
       resetForm();
       await loadResources();
     } catch (err) {
-      setError(err.message);
+      setError(err.message);  
     }
   }
 
