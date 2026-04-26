@@ -54,7 +54,7 @@ public class GlobalExceptionHandler {
                 path,
                 validationErrors
         );
-        return ResponseEntity.status(status).body(body);
+        return ResponseEntity.status(status).body(body) ;
     }
 }
 

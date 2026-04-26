@@ -1,4 +1,4 @@
-package com.sliit.facilitiescatalogue.exception;
+package com.sliit.facilitiescatalogue.exception ;
 
 public class BadRequestException extends RuntimeException {
     public BadRequestException(String message) {
