@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class FacilitiesCatalogueApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(FacilitiesCatalogueApplication.class, args);
+        SpringApplication.run(FacilitiesCatalogueApplication.class, args) ;
     }
 }
 

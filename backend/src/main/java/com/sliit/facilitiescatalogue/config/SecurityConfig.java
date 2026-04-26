@@ -37,7 +37,7 @@ public class SecurityConfig {
                 .headers(headers -> headers.frameOptions(frameOptions -> frameOptions.sameOrigin()))
                 .httpBasic(Customizer.withDefaults());
 
-        return http.build();
+        return http.build() ;
     }
 
     @Bean

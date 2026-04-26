@@ -1,7 +1,7 @@
 package com.sliit.facilitiescatalogue.exception;
 
 import java.time.LocalDateTime;
-import java.util.Map;
+import java.util.Map ;
 
 public record ApiErrorResponse(
         LocalDateTime timestamp,
