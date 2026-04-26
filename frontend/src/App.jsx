@@ -1,5 +1,11 @@
 import { useEffect, useState } from "react";
-import { createResource, deleteResource, fetchCurrentUser, fetchResources, updateResource } from "./api";
+import {
+  createResource,
+  deleteResource,
+  fetchCurrentUser,
+  fetchResources,
+  updateResource,
+} from "./api";
 
 const initialForm = {
   resourceCode: "",
@@ -11,7 +17,7 @@ const initialForm = {
   availableFrom: "08:00",
   availableTo: "17:00",
   status: "ACTIVE",
-  active: true
+  active: true,
 };
 
 const defaultFilters = {
@@ -20,13 +26,13 @@ const defaultFilters = {
   minCapacity: "",
   location: "",
   status: "",
-  active: ""
+  active: "",
 };
 
 export default function App() {
   const [credentials, setCredentials] = useState({
     username: "admin@sliit.lk",
-    password: "Admin@123"
+    password: "Admin@123",
   });
   const [filters, setFilters] = useState(defaultFilters);
   const [resources, setResources] = useState([]);
@@ -83,7 +89,7 @@ export default function App() {
     const { name, value, type, checked } = event.target;
     setForm((previous) => ({
       ...previous,
-      [name]: type === "checkbox" ? checked : value
+      [name]: type === "checkbox" ? checked : value,
     }));
   }
 
@@ -99,7 +105,7 @@ export default function App() {
     const payload = {
       ...form,
       capacity: Number(form.capacity),
-      active: Boolean(form.active)
+      active: Boolean(form.active),
     };
 
     try {
@@ -111,7 +117,7 @@ export default function App() {
       resetForm();
       await loadResources();
     } catch (err) {
-      setError(err.message);  
+      setError(err.message);
     }
   }
 
@@ -127,7 +133,7 @@ export default function App() {
       availableFrom: resource.availableFrom,
       availableTo: resource.availableTo,
       status: resource.status,
-      active: resource.active
+      active: resource.active,
     });
   }
 
@@ -146,9 +152,15 @@ export default function App() {
   }
 
   const isAdmin = currentUser?.roles?.includes("ROLE_ADMIN");
-  const activeCount = resources.filter((resource) => resource.status === "ACTIVE").length;
-  const outOfServiceCount = resources.filter((resource) => resource.status === "OUT_OF_SERVICE").length;
-  const equipmentCount = resources.filter((resource) => resource.type === "EQUIPMENT").length;
+  const activeCount = resources.filter(
+    (resource) => resource.status === "ACTIVE",
+  ).length;
+  const outOfServiceCount = resources.filter(
+    (resource) => resource.status === "OUT_OF_SERVICE",
+  ).length;
+  const equipmentCount = resources.filter(
+    (resource) => resource.type === "EQUIPMENT",
+  ).length;
 
   return (
     <div className="page-shell">
@@ -157,10 +169,10 @@ export default function App() {
 
       <header className="hero">
         <div className="hero-copy-block">
-          <p className="eyebrow">IT3030 PAF 2026</p>
           <h1>Facilities & Assets Catalogue</h1>
           <p className="hero-copy">
-            Module A dashboard for managing lecture halls, labs, meeting rooms, and equipment.
+            Module A dashboard for managing lecture halls, labs, meeting rooms,
+            and equipment.
           </p>
           <div className="hero-badges">
             <span className="hero-badge">Smart Campus</span>
@@ -172,14 +184,20 @@ export default function App() {
         <div className="auth-card">
           <h2>Demo Login</h2>
           <p className="helper-text">
-            Sign in as <strong>ADMIN</strong> to manage resources or as <strong>USER</strong> to browse the catalogue.
+            Sign in as <strong>ADMIN</strong> to manage resources or as{" "}
+            <strong>USER</strong> to browse the catalogue.
           </p>
           <label>
             Username
             <input
               name="username"
               value={credentials.username}
-              onChange={(e) => setCredentials((prev) => ({ ...prev, username: e.target.value }))}
+              onChange={(e) =>
+                setCredentials((prev) => ({
+                  ...prev,
+                  username: e.target.value,
+                }))
+              }
             />
           </label>
           <label>
@@ -188,7 +206,12 @@ export default function App() {
               name="password"
               type="password"
               value={credentials.password}
-              onChange={(e) => setCredentials((prev) => ({ ...prev, password: e.target.value }))}
+              onChange={(e) =>
+                setCredentials((prev) => ({
+                  ...prev,
+                  password: e.target.value,
+                }))
+              }
             />
           </label>
           <button className="secondary-button" onClick={() => loadResources()}>
@@ -231,16 +254,25 @@ export default function App() {
         <form className="card feature-card" onSubmit={handleSearch}>
           <h2>Search & Filter</h2>
           <p className="section-intro">
-            Narrow the catalogue by resource type, campus location, capacity, lifecycle status, or keyword.
+            Narrow the catalogue by resource type, campus location, capacity,
+            lifecycle status, or keyword.
           </p>
           <div className="form-grid">
             <label>
               Keyword
-              <input name="keyword" value={filters.keyword} onChange={handleFilterChange} />
+              <input
+                name="keyword"
+                value={filters.keyword}
+                onChange={handleFilterChange}
+              />
             </label>
             <label>
               Type
-              <select name="type" value={filters.type} onChange={handleFilterChange}>
+              <select
+                name="type"
+                value={filters.type}
+                onChange={handleFilterChange}
+              >
                 <option value="">All</option>
                 <option value="LECTURE_HALL">Lecture Hall</option>
                 <option value="LAB">Lab</option>
@@ -250,15 +282,28 @@ export default function App() {
             </label>
             <label>
               Min Capacity
-              <input name="minCapacity" type="number" value={filters.minCapacity} onChange={handleFilterChange} />
+              <input
+                name="minCapacity"
+                type="number"
+                value={filters.minCapacity}
+                onChange={handleFilterChange}
+              />
             </label>
             <label>
               Location
-              <input name="location" value={filters.location} onChange={handleFilterChange} />
+              <input
+                name="location"
+                value={filters.location}
+                onChange={handleFilterChange}
+              />
             </label>
             <label>
               Status
-              <select name="status" value={filters.status} onChange={handleFilterChange}>
+              <select
+                name="status"
+                value={filters.status}
+                onChange={handleFilterChange}
+              >
                 <option value="">All</option>
                 <option value="ACTIVE">Active</option>
                 <option value="OUT_OF_SERVICE">Out of Service</option>
@@ -266,7 +311,11 @@ export default function App() {
             </label>
             <label>
               Active Flag
-              <select name="active" value={filters.active} onChange={handleFilterChange}>
+              <select
+                name="active"
+                value={filters.active}
+                onChange={handleFilterChange}
+              >
                 <option value="">All</option>
                 <option value="true">True</option>
                 <option value="false">False</option>
@@ -275,10 +324,14 @@ export default function App() {
           </div>
           <div className="actions">
             <button type="submit">Apply Filters</button>
-            <button type="button" className="secondary-button" onClick={() => {
-              setFilters(defaultFilters);
-              loadResources(defaultFilters);
-            }}>
+            <button
+              type="button"
+              className="secondary-button"
+              onClick={() => {
+                setFilters(defaultFilters);
+                loadResources(defaultFilters);
+              }}
+            >
               Reset
             </button>
           </div>
@@ -287,22 +340,37 @@ export default function App() {
         <section className="card feature-card">
           <h2>{editingId ? "Edit Resource" : "Add Resource"}</h2>
           <p className="section-intro">
-            Maintain structured catalogue entries with clean metadata for future booking and maintenance modules.
+            Maintain structured catalogue entries with clean metadata for future
+            booking and maintenance modules.
           </p>
           {isAdmin ? (
             <form onSubmit={handleSubmit}>
               <div className="form-grid">
                 <label>
                   Resource Code
-                  <input name="resourceCode" value={form.resourceCode} onChange={handleFormChange} required />
+                  <input
+                    name="resourceCode"
+                    value={form.resourceCode}
+                    onChange={handleFormChange}
+                    required
+                  />
                 </label>
                 <label>
                   Name
-                  <input name="name" value={form.name} onChange={handleFormChange} required />
+                  <input
+                    name="name"
+                    value={form.name}
+                    onChange={handleFormChange}
+                    required
+                  />
                 </label>
                 <label>
                   Type
-                  <select name="type" value={form.type} onChange={handleFormChange}>
+                  <select
+                    name="type"
+                    value={form.type}
+                    onChange={handleFormChange}
+                  >
                     <option value="LECTURE_HALL">Lecture Hall</option>
                     <option value="LAB">Lab</option>
                     <option value="MEETING_ROOM">Meeting Room</option>
@@ -311,46 +379,91 @@ export default function App() {
                 </label>
                 <label>
                   Capacity
-                  <input name="capacity" type="number" min="0" value={form.capacity} onChange={handleFormChange} required />
+                  <input
+                    name="capacity"
+                    type="number"
+                    min="0"
+                    value={form.capacity}
+                    onChange={handleFormChange}
+                    required
+                  />
                 </label>
                 <label>
                   Location
-                  <input name="location" value={form.location} onChange={handleFormChange} required />
+                  <input
+                    name="location"
+                    value={form.location}
+                    onChange={handleFormChange}
+                    required
+                  />
                 </label>
                 <label>
                   Status
-                  <select name="status" value={form.status} onChange={handleFormChange}>
+                  <select
+                    name="status"
+                    value={form.status}
+                    onChange={handleFormChange}
+                  >
                     <option value="ACTIVE">Active</option>
                     <option value="OUT_OF_SERVICE">Out of Service</option>
                   </select>
                 </label>
                 <label>
                   Available From
-                  <input name="availableFrom" type="time" value={form.availableFrom} onChange={handleFormChange} required />
+                  <input
+                    name="availableFrom"
+                    type="time"
+                    value={form.availableFrom}
+                    onChange={handleFormChange}
+                    required
+                  />
                 </label>
                 <label>
                   Available To
-                  <input name="availableTo" type="time" value={form.availableTo} onChange={handleFormChange} required />
+                  <input
+                    name="availableTo"
+                    type="time"
+                    value={form.availableTo}
+                    onChange={handleFormChange}
+                    required
+                  />
                 </label>
                 <label className="full-width">
                   Description
-                  <textarea name="description" rows="3" value={form.description} onChange={handleFormChange} />
+                  <textarea
+                    name="description"
+                    rows="3"
+                    value={form.description}
+                    onChange={handleFormChange}
+                  />
                 </label>
                 <label className="checkbox-row">
-                  <input name="active" type="checkbox" checked={form.active} onChange={handleFormChange} />
+                  <input
+                    name="active"
+                    type="checkbox"
+                    checked={form.active}
+                    onChange={handleFormChange}
+                  />
                   Active Resource
                 </label>
               </div>
               <div className="actions">
-                <button type="submit">{editingId ? "Update Resource" : "Create Resource"}</button>
-                <button type="button" className="secondary-button" onClick={resetForm}>
+                <button type="submit">
+                  {editingId ? "Update Resource" : "Create Resource"}
+                </button>
+                <button
+                  type="button"
+                  className="secondary-button"
+                  onClick={resetForm}
+                >
                   Clear
                 </button>
               </div>
             </form>
           ) : (
             <p className="helper-text">
-              Resource creation, editing, and deletion are available only for admin accounts.
+              Resource creation, editing, and deletion are available only for
+              admin accounts.
             </p>
           )}
         </section>
@@ -364,7 +477,9 @@ export default function App() {
               Review the current directory of bookable spaces and shared assets.
             </p>
           </div>
-          <span className="table-count">{loading ? "Loading..." : `${resources.length} resource(s)`}</span>
+          <span className="table-count">
+            {loading ? "Loading..." : `${resources.length} resource(s)`}
+          </span>
         </div>
 
         <div className="table-wrapper">
@@ -389,19 +504,31 @@ export default function App() {
                   <td>{resource.type.replaceAll("_", " ")}</td>
                   <td>{resource.capacity}</td>
                   <td>{resource.location}</td>
-                  <td>{resource.availableFrom} - {resource.availableTo}</td>
                   <td>
-                    <span className={`status-pill ${resource.status === "ACTIVE" ? "green" : "amber"}`}>
+                    {resource.availableFrom} - {resource.availableTo}
+                  </td>
+                  <td>
+                    <span
+                      className={`status-pill ${resource.status === "ACTIVE" ? "green" : "amber"}`}
+                    >
                       {resource.status}
                     </span>
                   </td>
                   <td className="action-row">
                     {isAdmin ? (
                       <>
-                        <button type="button" className="secondary-button" onClick={() => handleEdit(resource)}>
+                        <button
+                          type="button"
+                          className="secondary-button"
+                          onClick={() => handleEdit(resource)}
+                        >
                           Edit
                         </button>
-                        <button type="button" className="danger-button" onClick={() => handleDelete(resource.id)}>
+                        <button
+                          type="button"
+                          className="danger-button"
+                          onClick={() => handleDelete(resource.id)}
+                        >
                           Delete
                         </button>
                       </>
