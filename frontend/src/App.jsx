@@ -95,7 +95,7 @@ export default function App() {
 
   async function handleSearch(event) {
     event.preventDefault();
-    await loadResources(filters);
+    await loadResources(filters) ;
   }
 
   async function handleSubmit(event) {
