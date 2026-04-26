@@ -108,7 +108,7 @@ class ResourceControllerTest {
                 LocalTime.of(18, 0),
                 ResourceStatus.ACTIVE,
                 true
-        );
+        ) ;
     }
 }
 
