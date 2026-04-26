@@ -4,7 +4,7 @@ function buildHeaders(username, password) {
   return {
     "Content-Type": "application/json",
     Authorization: `Basic ${btoa(`${username}:${password}`)}`
-  };
+  } ;
 }
 
 export async function fetchResources(filters, credentials) {
