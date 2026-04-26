@@ -56,7 +56,7 @@ public class DataSeeder {
         entity.setAvailableTo(to);
         entity.setStatus(status);
         entity.setActive(active);
-        return entity;
+        return entity ;
     }
 }
 
